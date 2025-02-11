@@ -4,24 +4,35 @@ const AddTask =({taskList, setTaskList})=>{
     const [addModal, setAddModal] = useState(false);
     const [projectName, setProjectName] = useState("");
     const [taskDescription, setTaskDescription] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleInput = e => {
         // const name = e.target.name;
         // const value = e.target.value;
         const { name, value } = e.target;
 
-        if(name === "projectName") setProjectName(value)
+        if(name === "projectName") {
+            setProjectName(value)
+            setErrorMessage("")
+        }
+        if(name === "projectName" && value === ""){
+            setErrorMessage("Enter project name to continue");
+        }
         if(name === "taskDescription") setTaskDescription(value)
     }
 
     const handleAdd = e => {
         e.preventDefault();
-        setTaskList(
-            [...taskList, {projectName, taskDescription}]
-        );
-        setAddModal(false)
-        setProjectName("");
-        setTaskDescription("");
+        if(!projectName){
+            setErrorMessage("Enter project name to continue")
+        } else {
+            setTaskList(
+                [...taskList, {projectName, taskDescription}]
+            );
+            setAddModal(false)
+            setProjectName("");
+            setTaskDescription("");
+        }
     }
     return (
         <>
@@ -53,7 +64,7 @@ const AddTask =({taskList, setTaskList})=>{
                                         Project Name
                                     </label>
                                     <input
-                                        className="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-5 leading-tight
+                                        className="w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight
                                         focus:outline-none focus:bg-white" 
                                         id="project-name"
                                         name="projectName"
@@ -63,6 +74,7 @@ const AddTask =({taskList, setTaskList})=>{
                                         onChange={handleInput}
                                         required
                                     />
+                                    <p className="text-red-500 text-center mt-2 mb-5">{errorMessage}</p>
                                 </div>
                                 <div>
                                     <label className="track-wide uppercase text-gray-700 text-xs font-semibold mb-2 block" 
