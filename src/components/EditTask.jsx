@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const EditTask = ({task, index, taskList, setTaskList}) => {
+const EditTask = ({task, taskList, setTaskList}) => {
     const [editModal, setEditModal] = useState(false);
     const [projectName, setProjectName] = useState("");
     const [taskDescription, setTaskDescription] = useState("");
@@ -8,11 +8,9 @@ const EditTask = ({task, index, taskList, setTaskList}) => {
     useEffect(() => {
         setProjectName(task.projectName);
         setTaskDescription(task.taskDescription);
-    },[])
+    }, [])
 
     const handleInput = e => {
-        // const name = e.target.name;
-        // const value = e.target.value;
         const { name, value } = e.target;
 
         if(name === "projectName") setProjectName(value)
