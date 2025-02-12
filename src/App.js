@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddTask from "./components/AddTask";
 import ToDo from "./components/ToDo";
 
@@ -6,6 +6,13 @@ function App() {
   const [taskList, setTaskList] = useState([]);
   console.log(taskList);
 
+  useEffect(() => {
+    let array = localStorage.getItem("taskList");
+
+    if (array) {
+      setTaskList(JSON.parse(array));
+    }
+  }, []);
   return (
     <>
       <h1 className="text-2xl font-bold py-6 pl-6">The Task Tracker</h1>
