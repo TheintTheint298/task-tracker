@@ -7,6 +7,13 @@ const ToDo = ({task, index, taskList, setTaskList}) => {
     const [running, setRunning] = useState(false);
     const [{ isDragging }, drag] = useDrag(() => ({
         type: "todo",
+        item: {
+            id: index,
+            projectName: task.projectName,
+            taskDescription: task.taskDescription,
+            timestamp: task.timestamp,
+            duration: task.duration,
+        },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         })
@@ -54,8 +61,8 @@ const ToDo = ({task, index, taskList, setTaskList}) => {
                     <EditTask task={task} index={index} taskList={taskList} setTaskList={setTaskList} />
                 </div>
                 <p className="text-lg py-2">{task.taskDescription}</p>
-                <div className="w-full flex flex-row items-center justify-evenly">
-                    <div className="w-1/4 text-xl font-semibold py-4">
+                <div className="w-full flex flex-col sm:flex-row items-center justify-center sm:justify-evenly">
+                    <div className="sm:w-1/4 text-xl font-semibold py-4">
                         <span>{("0" + Math.floor((time /3600000) % 24)).slice(-2)}:</span>
                         <span>{("0" + Math.floor((time /60000) % 60)).slice(-2)}:</span>
                         <span>{("0" + Math.floor((time /1000) % 60)).slice(-2)}</span>
