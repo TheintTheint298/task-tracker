@@ -72,7 +72,7 @@ function App() {
           </div>
         </div>
         <div className="w-full flex flex-col" ref={drop}>
-          <h2 className="text-xl font-semibold w-3/4 max-w-lg my-4 py-2 px-4 bg-gray-300">
+          <h2 className="text-xl font-semibold w-3/4 max-w-lg my-4 py-2 px-4 bg-green-300">
             Completed:
           </h2>
           {completed.map((task, i) => (
